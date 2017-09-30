@@ -1,0 +1,13 @@
+{
+    "message-source-path": "/Airbus_UILegal/Ulegal_User_Service/resources/messages/message.json",
+    "locale-source-path": "/Airbus_UILegal/Ulegal_User_Service/resources/locales",
+    
+    "database-provider": "postgres",
+    "database-host": "localhost",
+    "database-port": 5432,
+    "database-name": "ulegal",
+    "database-user": "postgres",
+    "database-secret": "123456",
+    "database-pool-size-min": 2,
+    "database-pool-size-max": 10
+}
