@@ -31,13 +31,13 @@ export class AppConfigQR implements QueryRepository {
         this._knexConfiguration = KnexConfiguration.getInstance();
     }
 
-    public async findByKey(requestContext: RequestContext, userName: string): Promise<ServiceStatus> {
+    public async findByKey(requestContext: RequestContext, environment: string): Promise<ServiceStatus> {
 
         var serviceStatus = await ((requestContext, form) => {
 
             var knex = this._knexConfiguration.getKnex();
-            return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_DATA_TABLE)
-                .where(DatabaseConstants.USER_USERNAME_COL, userName)
+            return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.CONFIG_DATA_TABLE)
+                .where(DatabaseConstants.CONFIG_ENV_COL, environment)
                 .then((userInfo) => {
                     return userInfo ? ServiceStatusFactory
                         .getStatus(RestStatusCodeEnum.QUERY_HAS_DATA, userInfo) : ServiceStatusFactory.getStatus(RestStatusCodeEnum.QUERY_HAS_NO_DATA, null);
@@ -47,7 +47,7 @@ export class AppConfigQR implements QueryRepository {
                         .getStatus(RestStatusCodeEnum.DATABASE_ERROR, undefined);
                 });
 
-        })(requestContext, userName);
+        })(requestContext, environment);
 
         return serviceStatus;
     }

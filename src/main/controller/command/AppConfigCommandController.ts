@@ -74,14 +74,13 @@ export class AppConfigCommandController extends CommandControllerTemplate {
 
     public async delete(req: Request, res: Response): Promise<string> {
         var headers: any = req.headers;
-        var userId: string = req.params.userId;
+        var env: string = req.params.env;
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
     
         var responseBody = await (() => { 
             return this._appConfigScr
-                .delete(requestContext, userId)
+                .delete(requestContext, env)
                 .then((status) => {
-                    console.log("asdasdasd" + JSON.stringify(status));
                     return JSON.stringify(status);
                 })
                 .catch((err) => {

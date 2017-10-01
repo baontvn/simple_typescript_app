@@ -75,12 +75,12 @@ export class RoleCommandController extends CommandControllerTemplate {
 
     public async delete(req: Request, res: Response): Promise<string> {
         var headers: any = req.headers;
-        var form: any = req.body.command;
+        var roleId: string = req.params.roleId;
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
     
         var responseBody = await (() => { 
             return this._roleScr
-                .delete(requestContext, form)
+                .delete(requestContext, roleId)
                 .then((status) => {
                     return JSON.stringify(status);
                 })

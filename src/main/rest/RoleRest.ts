@@ -28,6 +28,7 @@ export class RoleRest {
 
     private loadDependencies(): void {
         this._commandController = RoleCommandController.getInstance();
+        this._queryController = RoleQueryController.getInstance();
     }
 
     private loadRoutes(): void {
@@ -35,7 +36,7 @@ export class RoleRest {
             this._queryController.doACommand(req, res, DMLMethodEnum.FIND_BY_KEY);
         });
         
-        this._server.post('/role/addRole', (req, res) => {
+        this._server.post('/role', (req, res) => {
             
             this._commandController.doACommand(req, res, DMLMethodEnum.SAVE);
         });

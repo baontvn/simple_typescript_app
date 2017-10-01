@@ -115,7 +115,6 @@ export class UserSCR implements SingleCommandRepository {
 
             return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_DATA_TABLE)
                 .where(DatabaseConstants.USER_USERNAME_COL, userId)
-                .returning(DatabaseConstants.USER_ID_COL)
                 .del()
                 .then((returnId) => {
                     return ServiceStatusFactory

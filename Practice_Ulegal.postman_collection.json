@@ -1,0 +1,407 @@
+{
+	"id": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+	"name": "Practice_Ulegal",
+	"description": "",
+	"order": [
+		"ae8dd042-fcda-d492-01ff-11144a1e1b8d",
+		"05539655-e63e-fbb4-bfa5-2202ae2135c3",
+		"12a434b5-73ee-bfd4-9907-60a3f340481c",
+		"34872d43-d9d8-c6e8-a343-13fcd53f7a30",
+		"1cb24407-4412-e742-52fb-bed782fad7e1",
+		"c3ee4330-a5ae-73b9-54f8-1838fa84f59d",
+		"4935c5fe-4800-aa50-e332-667b0527ce4f",
+		"514fff88-68f0-865d-ce26-99369ac604db",
+		"cd7b9b1e-69a4-09d4-0154-73331b7481c7",
+		"c3968d85-3334-41ae-d393-a2b662e0a46f",
+		"e48fff49-92dc-97f7-eee8-9e6566c5d7bd",
+		"b3139c6e-2028-c23b-c138-453f7f8a0823"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1506690000200,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "05539655-e63e-fbb4-bfa5-2202ae2135c3",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:3000/role/admin",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"data": null,
+			"dataMode": "params",
+			"name": "[ROLE] GET BY KEY",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1506861364567,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "12a434b5-73ee-bfd4-9907-60a3f340481c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/role/admin",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506861452064,
+			"name": "[ROLE] Update",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"name\": \"admin\",\n\t\t\"description\": \"Super admin\"\n\t}\n}"
+		},
+		{
+			"id": "1cb24407-4412-e742-52fb-bed782fad7e1",
+			"headers": "Content-Type: application/json\nuserId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/user",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506861387863,
+			"name": "[USER] Add",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"userName\": \"test2\",\n\t\t\"hashedPassword\": \"new password\",\n\t\t\"fullName\": \"Bao Dep Trai 2017\",\n\t\t\"email\": \"baodeptrai2017@gmail.com\",\n\t\t\"phone\": \"01234567890\",\n\t\t\"roleId\": 1\n\t}\n}"
+		},
+		{
+			"id": "34872d43-d9d8-c6e8-a343-13fcd53f7a30",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:3000/role/admin",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"data": null,
+			"dataMode": "params",
+			"name": "[ROLE] GET BY KEY",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1506861481071,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "4935c5fe-4800-aa50-e332-667b0527ce4f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/user/test2",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506861389112,
+			"name": "[USER] Delete",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\" : {\n\t\t\n\t}\n}"
+		},
+		{
+			"id": "514fff88-68f0-865d-ce26-99369ac604db",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/user/test",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506860652992,
+			"name": "[USER] GET BY KEY",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": []
+		},
+		{
+			"id": "ae8dd042-fcda-d492-01ff-11144a1e1b8d",
+			"headers": "Content-Type: application/json\nuserId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/role",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506860571963,
+			"name": "[ROLE] Add",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"name\": \"admin\",\n\t\t\"description\": \"ADMIN DESCRIPTION...\"\n\t}\n}"
+		},
+		{
+			"id": "b3139c6e-2028-c23b-c138-453f7f8a0823",
+			"headers": "//Content-Type: application/json\n//userId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"url": "http://localhost:3000/appconfig/dev",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506861924232,
+			"name": "[APP_CONFIG] GET BY KEY",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"appName\": \"user-management-app\",\n\t\t\"environment\": \"dev\",\n\t\t\"urlSignUp\": \"sign up link\",\n\t\t\"urlSignIn\": \"sign in link\",\n\t\t\"urlResetPassword\": \"reset password link\",\n\t\t\"urlApplication\": \"app link\"\n\t}\n}"
+		},
+		{
+			"id": "c3968d85-3334-41ae-d393-a2b662e0a46f",
+			"headers": "Content-Type: application/json\nuserId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/appconfig/production",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506863421872,
+			"name": "[APP_CONFIG] Update",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"appName\": \"user-management-app\",\n\t\t\"environment\": \"dev-4\",\n\t\t\"urlSignUp\": \"sign up link - dev 4\",\n\t\t\"urlSignIn\": \"sign in link - dev 4\",\n\t\t\"urlResetPassword\": \"reset password link\",\n\t\t\"urlApplication\": \"app link\"\n\t}\n}"
+		},
+		{
+			"id": "c3ee4330-a5ae-73b9-54f8-1838fa84f59d",
+			"headers": "Content-Type: application/json\nuserId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/user/baonguyen",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506743349840,
+			"name": "[USER] Update",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"userName\": \"baonguyen\",\n\t\t\"hashedPassword\": \"new pass\",\n\t\t\"fullName\": \"Bao Dep Trai 2017\",\n\t\t\"email\": \"baodeptrai2017@gmail.com\",\n\t\t\"phone\": \"01234567890\",\n\t\t\"roleId\": 1\n\t}\n}"
+		},
+		{
+			"id": "cd7b9b1e-69a4-09d4-0154-73331b7481c7",
+			"headers": "Content-Type: application/json\nuserId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/appconfig",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506863369512,
+			"name": "[APP_CONFIG] ADD",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": "{\n\t\"command\": {\n\t\t\"appName\": \"user-management-app\",\n\t\t\"environment\": \"dev-4\",\n\t\t\"urlSignUp\": \"sign up link 1\",\n\t\t\"urlSignIn\": \"sign in link 1\",\n\t\t\"urlResetPassword\": \"reset password link 1\",\n\t\t\"urlApplication\": \"app link - backup\"\n\t}\n}"
+		},
+		{
+			"id": "e48fff49-92dc-97f7-eee8-9e6566c5d7bd",
+			"headers": "//Content-Type: application/json\n//userId: 1\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"url": "http://localhost:3000/appconfig/dev",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506861953480,
+			"name": "[APP_CONFIG] Delete",
+			"description": "",
+			"collectionId": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+			"responses": [],
+			"rawModeData": ""
+		}
+	]
+}

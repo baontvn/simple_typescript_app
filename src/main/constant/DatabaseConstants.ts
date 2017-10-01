@@ -32,15 +32,11 @@ export class DatabaseConstants {
     // Config Table columns
     public static CONFIG_ID_COL: string = "id";
     public static CONFIG_APPNAME_COL: string = "appName";
-    public static CONFIG_LANGUAGE_COL: string = "language";
-    public static CONFIG_LINK_SIGNUP_COL: string = "linkSignUp";
-    public static CONFIG_LINK_SIGNIN_COL: string = "linkSignIn";
-    public static CONFIG_LINK_RESET_PASSWORD_COL: string = "linkResetPassword";
-    public static CONFIG_FONT_SIZE_COL: string = "fontSize";
-    public static CONFIG_FONT_COLOR_COL: string = "fontColor";
-    public static CONFIG_FONT_FAMILY_COL: string = "fontFamily";
-    public static CONFIG_HASH_KEY_COL: string = "hashKey";
-    public static CONFIG_HASH_ALGORITHM_COL: string = "hashAlgorithm";
+    public static CONFIG_ENV_COL: string = "environment";
+    public static CONFIG_URL_SIGNUP_COL: string = "urlSignUp";
+    public static CONFIG_URL_SIGNIN_COL: string = "urlSignIn";
+    public static CONFIG_URL_RESET_PASSWORD_COL: string = "urlResetPassword";
+    public static CONFIG_URL_APP_COL: string = "urlApplication";
     public static CONFIG_CREATED_BY_COL: string = "createdBy";
     public static CONFIG_CREATED_TIME_COL: string = "createdTime";
     public static CONFIG_MODIFIED_BY_COL: string = "editedBy";

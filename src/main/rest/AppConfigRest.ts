@@ -1,14 +1,14 @@
 
-import { UserCommandController } from '../controller/command/UserCommandController';
-import { UserQueryController } from '../controller/query/UserQueryController';
+import { AppConfigCommandController } from '../controller/command/AppConfigCommandController';
+import { AppConfigQueryController } from '../controller/query/AppConfigQueryController';
 import { DMLMethodEnum } from '../../lib/common/constant/enum/DMLMethodEnum';
 
 export class AppConfigRest {
 
     private static INSTANCE: AppConfigRest;
 
-    private _commandController: UserCommandController;
-    private _queryController: UserQueryController;
+    private _commandController: AppConfigCommandController;
+    private _queryController: AppConfigQueryController;
     private _server: any;
 
     constructor(server: any) {
@@ -27,25 +27,25 @@ export class AppConfigRest {
     }
 
     private loadDependencies(): void {
-        this._commandController = UserCommandController.getInstance();
-        this._queryController = UserQueryController.getInstance();
+        this._commandController = AppConfigCommandController.getInstance();
+        this._queryController = AppConfigQueryController.getInstance();
     }
 
     private loadRoutes(): void {
-        this._server.get('/user/:userId', (req, res) => {
+        this._server.get('/appconfig/:env', (req, res) => {
             this._queryController.doACommand(req, res, DMLMethodEnum.FIND_BY_KEY);
         });
         
-        this._server.post('/user/addNewUser', (req, res) => {
+        this._server.post('/appconfig', (req, res) => {
             
             this._commandController.doACommand(req, res, DMLMethodEnum.SAVE);
         });
 
-        this._server.put('/user/:userId', (req, res) => {
+        this._server.put('/appconfig/:env', (req, res) => {
             this._commandController.doACommand(req, res, DMLMethodEnum.UPDATE);
         });
 
-        this._server.delete('/user/:userId', (req, res) => {
+        this._server.delete('/appconfig/:env', (req, res) => {
             this._commandController.doACommand(req, res, DMLMethodEnum.DELETE);
         });
 

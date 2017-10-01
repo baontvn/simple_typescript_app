@@ -36,7 +36,7 @@ export class AppConfigQueryController extends QueryControllerTemplate {
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
         var responseBody = await (() => {
             return this._appConfigQr
-                .findByKey(requestContext, req.params.userId)
+                .findByKey(requestContext, req.params.env)
                 .then((status) => {
                     console.log(status);
                     return JSON.stringify(status);

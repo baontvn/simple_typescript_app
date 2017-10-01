@@ -89,8 +89,26 @@ export class RoleSCR implements SingleCommandRepository {
         return null;
     }
 
-    public async delete(requestContext: RequestContext, form: any): Promise<ServiceStatus> {
-        return null;
+    public async delete(requestContext: RequestContext, roleId: string): Promise<ServiceStatus> {
+        var serviceStatus = await ((requestContext, userId) => {
+
+            var knex = this._knexConfiguration.getKnex();
+
+            return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.ROLE_DATA_TABLE)
+                .where(DatabaseConstants.ROLE_NAME_COL, roleId)
+                .del()
+                .then((returnId) => {
+                    return ServiceStatusFactory
+                        .getStatus(RestStatusCodeEnum.DELETE_SUCCESSFUL, returnId);
+                })
+                .catch((err) => {
+                    return ServiceStatusFactory
+                        .getStatus(RestStatusCodeEnum.DATABASE_ERROR, undefined);
+                });
+
+        })(requestContext, roleId);
+
+        return serviceStatus;
     }
 
     public async checkExistedInfo(table: string, columnName: string, value: any): Promise<boolean> {

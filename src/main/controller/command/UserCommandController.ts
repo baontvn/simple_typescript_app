@@ -81,7 +81,6 @@ export class UserCommandController extends CommandControllerTemplate {
             return this._userScr
                 .delete(requestContext, userId)
                 .then((status) => {
-                    console.log("asdasdasd" + JSON.stringify(status));
                     return JSON.stringify(status);
                 })
                 .catch((err) => {

@@ -36,7 +36,7 @@ export class RoleQueryController extends QueryControllerTemplate {
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
         var responseBody = await (() => {
             return this._roleQr
-                .findByKey(requestContext, req.params.userId)
+                .findByKey(requestContext, req.params.roleId)
                 .then((status) => {
                     console.log(status);
                     return JSON.stringify(status);

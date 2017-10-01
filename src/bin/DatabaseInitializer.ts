@@ -56,21 +56,19 @@ export class DatabaseInitializer {
             .createTableIfNotExists(DatabaseConstants.SCHEMA + '.' + DatabaseConstants.CONFIG_DATA_TABLE, (table) => {
 
                 table.increments();
-                table.string(DatabaseConstants.CONFIG_LANGUAGE_COL, 100);
+                table.string(DatabaseConstants.CONFIG_ENV_COL, 50);
                 table.string(DatabaseConstants.CONFIG_APPNAME_COL, 100);
-                table.string(DatabaseConstants.CONFIG_LINK_SIGNUP_COL, 100);
-                table.string(DatabaseConstants.CONFIG_LINK_SIGNIN_COL, 100);
-                table.string(DatabaseConstants.CONFIG_LINK_RESET_PASSWORD_COL, 100);
-                table.integer(DatabaseConstants.CONFIG_FONT_SIZE_COL);
-                table.string(DatabaseConstants.CONFIG_FONT_COLOR_COL, 100);
-                table.string(DatabaseConstants.CONFIG_FONT_FAMILY_COL, 100);
-                table.string(DatabaseConstants.CONFIG_HASH_KEY_COL, 100);
-                table.string(DatabaseConstants.CONFIG_HASH_ALGORITHM_COL, 100);
+                table.string(DatabaseConstants.CONFIG_URL_SIGNUP_COL, 100);
+                table.string(DatabaseConstants.CONFIG_URL_SIGNIN_COL, 100);
+                table.string(DatabaseConstants.CONFIG_URL_RESET_PASSWORD_COL, 100);
+                table.string(DatabaseConstants.CONFIG_URL_APP_COL, 100);
 
                 table.timestamp(DatabaseConstants.CONFIG_CREATED_TIME_COL, 'timestamptz');
                 table.integer(DatabaseConstants.CONFIG_CREATED_BY_COL);
                 table.timestamp(DatabaseConstants.CONFIG_MODIFIED_TIME_COL, 'timestamptz');
                 table.integer(DatabaseConstants.CONFIG_MODIFIED_BY_COL);
+
+                table.unique(DatabaseConstants.CONFIG_ENV_COL);
             })
 
             .then((obj) => {
