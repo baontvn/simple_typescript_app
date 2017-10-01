@@ -4,6 +4,7 @@ import { QueryControllerTemplate } from '../../../lib/controller-layer/QueryCont
 import { RequestContext } from '../../../lib/controller-layer/RequestContext';
 import { RequestUtils } from '../../../lib/controller-layer/RequestUtils';
 import { RestStatusFactory } from '../../../lib/controller-layer/RestStatusFactory';
+import { RestStatusCodeEnum } from '../../../lib/common/constant/enum/RestStatusCodeEnum';
 
 import { AppConfigQR } from '../../repository/qr/AppConfigQR';
 
@@ -40,7 +41,7 @@ export class AppConfigQueryController extends QueryControllerTemplate {
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
 
         var response = await this._redisConfig.getRedisCache(`appConfig_${req.params.env}`).then((value) => {
-            if (value) return value;
+            if (value) return JSON.stringify(RestStatusFactory.getStatus(RestStatusCodeEnum.QUERY_HAS_DATA, value));
             else {
                 return this._appConfigQr
                 .findByKey(requestContext, req.params.env)

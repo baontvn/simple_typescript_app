@@ -1,0 +1,269 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Practice_Ulegal",
+		"_postman_id": "e6275e55-c64b-0df1-4ca4-7e80825210e9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[ROLE] Add",
+			"request": {
+				"url": "http://localhost:3000/role",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"name\": \"admin\",\n\t\t\"description\": \"ADMIN DESCRIPTION...\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[ROLE] GET BY KEY",
+			"request": {
+				"url": "http://localhost:3000/role/admin",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[ROLE] Update",
+			"request": {
+				"url": "http://localhost:3000/role/admin",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"name\": \"admin\",\n\t\t\"description\": \"Super admin\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[ROLE] GET BY KEY",
+			"request": {
+				"url": "http://localhost:3000/role/admin",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[USER] Add",
+			"request": {
+				"url": "http://localhost:3000/user",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"userName\": \"test2\",\n\t\t\"hashedPassword\": \"new password\",\n\t\t\"fullName\": \"Bao Dep Trai 2017\",\n\t\t\"email\": \"baodeptrai2017@gmail.com\",\n\t\t\"phone\": \"01234567890\",\n\t\t\"roleId\": 1\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[USER] Update",
+			"request": {
+				"url": "http://localhost:3000/user/baonguyen",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"userName\": \"baonguyen\",\n\t\t\"hashedPassword\": \"new pass\",\n\t\t\"fullName\": \"Bao Dep Trai 2017\",\n\t\t\"email\": \"baodeptrai2017@gmail.com\",\n\t\t\"phone\": \"01234567890\",\n\t\t\"roleId\": 1\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[USER] Delete",
+			"request": {
+				"url": "http://localhost:3000/user/test2",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\" : {\n\t\t\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[USER] GET BY KEY",
+			"request": {
+				"url": "http://localhost:3000/user/test",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[APP_CONFIG] ADD",
+			"request": {
+				"url": "http://localhost:3000/appconfig",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"appName\": \"user-management-app\",\n\t\t\"environment\": \"dev-4\",\n\t\t\"urlSignUp\": \"sign up link 1\",\n\t\t\"urlSignIn\": \"sign in link 1\",\n\t\t\"urlResetPassword\": \"reset password link 1\",\n\t\t\"urlApplication\": \"app link - backup\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[APP_CONFIG] Update",
+			"request": {
+				"url": "http://localhost:3000/appconfig/dev-4",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"appName\": \"user-management-app\",\n\t\t\"environment\": \"dev-4\",\n\t\t\"urlSignUp\": \"sign up link - dev 4\",\n\t\t\"urlSignIn\": \"sign in link - dev 4\",\n\t\t\"urlResetPassword\": \"reset password link\",\n\t\t\"urlApplication\": \"app link\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[APP_CONFIG] Delete",
+			"request": {
+				"url": "http://localhost:3000/appconfig/dev",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "[APP_CONFIG] GET BY KEY",
+			"request": {
+				"url": "http://localhost:3000/appconfig/dev",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "userId",
+						"value": "1",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"command\": {\n\t\t\"appName\": \"user-management-app\",\n\t\t\"environment\": \"dev\",\n\t\t\"urlSignUp\": \"sign up link\",\n\t\t\"urlSignIn\": \"sign in link\",\n\t\t\"urlResetPassword\": \"reset password link\",\n\t\t\"urlApplication\": \"app link\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
