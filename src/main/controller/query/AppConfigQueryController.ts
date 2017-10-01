@@ -7,11 +7,14 @@ import { RestStatusFactory } from '../../../lib/controller-layer/RestStatusFacto
 
 import { AppConfigQR } from '../../repository/qr/AppConfigQR';
 
+import { RedisConfig } from '../../../bin/RedisConfig';
+
 export class AppConfigQueryController extends QueryControllerTemplate {
 
     private static INSTANCE: AppConfigQueryController;
 
     private _appConfigQr: AppConfigQR;
+    private _redisConfig: RedisConfig;
 
     constructor() {
         super();
@@ -29,24 +32,29 @@ export class AppConfigQueryController extends QueryControllerTemplate {
 
     private loadDependencies(): void {
         this._appConfigQr = AppConfigQR.getInstance();
+        this._redisConfig = RedisConfig.getInstance();
     }
 
     public async findByKey(req: Request, res: Response): Promise<string> {
         var headers: any = req.headers;
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
-        var responseBody = await (() => {
-            return this._appConfigQr
+
+        var response = await this._redisConfig.getRedisCache(`appConfig_${req.params.env}`).then((value) => {
+            if (value) return value;
+            else {
+                return this._appConfigQr
                 .findByKey(requestContext, req.params.env)
                 .then((status) => {
-                    console.log(status);
                     return JSON.stringify(status);
                 })
                 .catch((err) => {
                     return JSON.stringify(RestStatusFactory.getStatus(null, null));
                 });
-        })();
+            }
+            
+        });
 
-        return responseBody;
+        return response;
     }
 
     public async findByQuerystring(req: Request, res: Response): Promise<string> {

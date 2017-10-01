@@ -1,4 +1,5 @@
 var redis = require('redis');
+import { createClient } from 'then-redis';
 
 export class RedisConfig {
 
@@ -19,34 +20,18 @@ export class RedisConfig {
     }
 
     private loadDependencies(): void {
-        this._client = redis.createClient();        
-        console.log('REDIS CONNECTED>>>>>>');
+        this._client = createClient();        
     }
 
-    public getRedisCache(key: string): any {
-        return this._client.get(key, function (err, value) {
-            if (err) return null;
-            console.log('[REDIS] Cache Info : ');
-            console.log(value);
-            console.log('---------------------');
-            return value;
-        });
+    public getRedisCache(key: string): Promise<any> {
+        return this._client.get(key);
     }
 
     public setRedisCache(key: string, value: string): void {
-        this._client.set(key, value, function (error) {
-            if (error) console.log('[REDIS] Cache updates failed'); 
-            console.log('[REDIS] Cache updated!'); 
-         });
+        this._client.set(key, value);
     }
 
     public removeRedisCache(key: string): void {
-        this._client.del(key, function(err, response) {
-            if (response == 1) {
-               console.log("[REDIS] Cache deleted Successfully!")
-            } else{
-             console.log("[REDIS] Cache cannot delete")
-            }
-         })
+        this._client.del(key)
     }
 }
