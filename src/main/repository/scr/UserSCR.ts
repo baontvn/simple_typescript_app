@@ -12,6 +12,9 @@ export class UserSCR implements SingleCommandRepository {
 
     private static INSTANCE: UserSCR;
 
+    // USER - 1
+    private static DEFAULT_ROLE_ID: any = 1;
+
     private _knexConfiguration: KnexConfiguration;
 
     constructor() {
@@ -37,29 +40,45 @@ export class UserSCR implements SingleCommandRepository {
 
             var knex = this._knexConfiguration.getKnex();
 
-            return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_DATA_TABLE)
-                .insert({
-                    userName: form.userName,
-                    hashedPassword: form.hashedPassword,
-                    fullName: form.fullName,
-                    email: form.email,
-                    phone: form.phone,
-                    roleId: form.roleId,
-                    isActive: true,
-                    createdBy: requestContext.userId,
-                    createdTime: new Date()
-                })
-                .returning(DatabaseConstants.USER_ID_COL)
-                .then((returnId) => {
-                    return ServiceStatusFactory
-                        .getStatus(RestStatusCodeEnum.SAVE_SUCCESSFUL, returnId);
-                })
-                .catch((err) => {
-                    console.log(err);
-                    return ServiceStatusFactory
-                        .getStatus(RestStatusCodeEnum.DATABASE_ERROR, undefined);
-                });
+            return this.checkExistedInfo(DatabaseConstants.USER_DATA_TABLE, DatabaseConstants.USER_USERNAME_COL, form.userName).then((isExisted) => {
 
+                if (isExisted) return { message: "User is existed" };
+
+                return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_DATA_TABLE)
+                    .insert({
+                        userName: form.userName,
+                        hashedPassword: form.hashedPassword,
+                        fullName: form.fullName,
+                        email: form.email,
+                        phone: form.phone,
+                        isActive: true,
+                        createdBy: requestContext.userId,
+                        createdTime: new Date()
+                    })
+                    .returning(DatabaseConstants.USER_ID_COL)
+                    .then((returnIds) => {
+                        // Add User and Role
+                        var roleIds = form.roleIds.map(roleId => { return { userId: returnIds[0], roleId: roleId } });
+                        if (roleIds.length > 0) {
+                            knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_ROLE_DATA_TABLE)
+                                .insert(roleIds).then(() => {
+                                    console.log('Added user and role...');
+                                });
+                        } else {
+                            knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_ROLE_DATA_TABLE)
+                                .insert({ userId: returnIds[0], roleId: UserSCR.DEFAULT_ROLE_ID }).then(() => {
+                                    console.log('Added user and role...');
+                                });
+                        }
+                        return ServiceStatusFactory
+                            .getStatus(RestStatusCodeEnum.SAVE_SUCCESSFUL, returnIds[0]);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return ServiceStatusFactory
+                            .getStatus(RestStatusCodeEnum.DATABASE_ERROR, undefined);
+                    });
+            });
         })(requestContext, form);
 
         return serviceStatus;
@@ -73,8 +92,6 @@ export class UserSCR implements SingleCommandRepository {
 
             return this.checkExistedInfo(DatabaseConstants.USER_DATA_TABLE, DatabaseConstants.USER_USERNAME_COL, form.userName).then((isExisted) => {
 
-                console.log("User is existed: " + isExisted);
-
                 return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_DATA_TABLE)
                     .where(DatabaseConstants.USER_USERNAME_COL, form.userName)
                     .update({
@@ -83,22 +100,33 @@ export class UserSCR implements SingleCommandRepository {
                         fullName: form.fullName,
                         email: form.email,
                         phone: form.phone,
-                        roleId: form.roleId,
                         isActive: form.isActive,
                         editedBy: requestContext.userId,
                         editedTime: new Date()
-                    }, [DatabaseConstants.USER_USERNAME_COL, DatabaseConstants.USER_MODIFIED_TIME_COL, DatabaseConstants.USER_MODIFIED_BY_COL])
-                    .then((returnId) => {
-                        console.log(ServiceStatusFactory
-                            .getStatus(RestStatusCodeEnum.UPDATE_SUCCESSFUL, returnId));
+                    }, [DatabaseConstants.USER_ID_COL, DatabaseConstants.USER_USERNAME_COL, DatabaseConstants.USER_MODIFIED_TIME_COL, DatabaseConstants.USER_MODIFIED_BY_COL])
+                    .then((responseData) => {
+                        // Update User and Role
+                        var roleIds = form.roleIds.map(roleId => { return { userId: responseData[0][DatabaseConstants.USER_ID_COL], roleId: roleId } });
+
+                        console.log(roleIds);
+                        if (roleIds.length > 0) {
+                            knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_ROLE_DATA_TABLE)
+                                .where(DatabaseConstants.USER_ROLE_USERID_BY_COL, responseData[0][DatabaseConstants.USER_ID_COL])
+                                .del()
+                                .then(() => {
+                                    knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_ROLE_DATA_TABLE).insert(roleIds).then(() => {
+                                        console.log('Updated user and role...');
+                                    });
+                                })
+                        }
                         return ServiceStatusFactory
-                            .getStatus(RestStatusCodeEnum.UPDATE_SUCCESSFUL, returnId);
+                            .getStatus(RestStatusCodeEnum.UPDATE_SUCCESSFUL, responseData[0]);
                     })
                     .catch((err) => {
                         return ServiceStatusFactory
                             .getStatus(RestStatusCodeEnum.DATABASE_ERROR, undefined);
                     });
-            })
+            });
         })(requestContext, form);
 
         return serviceStatus;
@@ -138,7 +166,7 @@ export class UserSCR implements SingleCommandRepository {
             return knex(DatabaseConstants.SCHEMA + "." + table)
                 .where(columnName, value)
                 .then((result) => {
-                    return result ? true : false;
+                    return result.length > 0 ? true : false;
                 })
                 .catch((err) => {
                     return true;

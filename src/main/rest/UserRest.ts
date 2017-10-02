@@ -36,6 +36,11 @@ export class UserRest {
             this._queryController.doACommand(req, res, DMLMethodEnum.FIND_BY_KEY);
         });
         
+        this._server.get('/user', (req, res) => {
+            
+            this._queryController.doACommand(req, res, DMLMethodEnum.FIND_ALL);
+        });
+
         this._server.post('/user', (req, res) => {
             
             this._commandController.doACommand(req, res, DMLMethodEnum.SAVE);

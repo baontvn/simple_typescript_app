@@ -11,7 +11,7 @@ import { AppConfigQR } from '../../repository/qr/AppConfigQR';
 import { RedisConfig } from '../../../bin/RedisConfig';
 
 export class AppConfigQueryController extends QueryControllerTemplate {
-
+    
     private static INSTANCE: AppConfigQueryController;
 
     private _appConfigQr: AppConfigQR;
@@ -68,6 +68,24 @@ export class AppConfigQueryController extends QueryControllerTemplate {
 
     public async queryByDemand(req: Request, res: Response): Promise<string> {
         return null;
+    }
+
+    public async findAll(req: Request, res: Response): Promise<string> {
+        var headers: any = req.headers;
+        var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
+
+        var response = await (()=>{
+            return this._appConfigQr
+            .findAll(requestContext)
+            .then((status) => {
+                return JSON.stringify(status);
+            })
+            .catch((err) => {
+                return JSON.stringify(RestStatusFactory.getStatus(null, null));
+            });
+        })();
+
+        return response;
     }
 
 

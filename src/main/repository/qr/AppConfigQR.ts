@@ -52,6 +52,27 @@ export class AppConfigQR implements QueryRepository {
         return serviceStatus;
     }
 
+    public async findAll(requestContext: RequestContext): Promise<ServiceStatus> {
+
+        var serviceStatus = await ((requestContext, form) => {
+
+            var knex = this._knexConfiguration.getKnex();
+            return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.CONFIG_DATA_TABLE)
+                .select()
+                .then((responseData) => {
+                    return ServiceStatusFactory
+                    .getStatus(RestStatusCodeEnum.QUERY_HAS_DATA, responseData)
+                })
+                .catch((err) => {
+                    return ServiceStatusFactory
+                        .getStatus(RestStatusCodeEnum.DATABASE_ERROR, undefined);
+                });
+
+        })(requestContext);
+
+        return serviceStatus;
+    }
+
     findByQueryString(requestContext: RequestContext, ...args: any[]): Promise<ServiceStatus> {
         throw new Error("Method not implemented.");
     }
@@ -61,4 +82,6 @@ export class AppConfigQR implements QueryRepository {
     queryByDemand(requestContext: RequestContext, form: any): Promise<ServiceStatus> {
         throw new Error("Method not implemented.");
     }
+
+
 }

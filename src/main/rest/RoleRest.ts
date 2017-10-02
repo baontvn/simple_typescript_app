@@ -35,6 +35,10 @@ export class RoleRest {
         this._server.get('/role/:roleId', (req, res) => {
             this._queryController.doACommand(req, res, DMLMethodEnum.FIND_BY_KEY);
         });
+
+        this._server.get('/role', (req, res) => {
+            this._queryController.doACommand(req, res, DMLMethodEnum.FIND_ALL);
+        });
         
         this._server.post('/role', (req, res) => {
             

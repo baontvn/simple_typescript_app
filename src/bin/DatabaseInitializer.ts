@@ -50,8 +50,12 @@ export class DatabaseInitializer {
                 table.timestamp(DatabaseConstants.USER_MODIFIED_TIME_COL, 'timestamptz');
                 table.integer(DatabaseConstants.USER_MODIFIED_BY_COL);
                 table.unique(DatabaseConstants.USER_USERNAME_COL);
+            })
+            .createTableIfNotExists(DatabaseConstants.SCHEMA + '.' + DatabaseConstants.USER_ROLE_DATA_TABLE, (table) => {
 
-                table.integer(DatabaseConstants.USER_ROLEID_COL).unsigned().references(DatabaseConstants.ROLE_ID_COL).inTable(DatabaseConstants.SCHEMA + '.' + DatabaseConstants.USER_DATA_TABLE);
+                table.increments();
+                table.integer(DatabaseConstants.USER_ROLE_USERID_BY_COL).unsigned().references(DatabaseConstants.USER_ID_COL).inTable(DatabaseConstants.SCHEMA + '.' + DatabaseConstants.USER_DATA_TABLE);;
+                table.integer(DatabaseConstants.USER_ROLE_ROLEID_BY_COL).unsigned().references(DatabaseConstants.ROLE_ID_COL).inTable(DatabaseConstants.SCHEMA + '.' + DatabaseConstants.ROLE_DATA_TABLE);;
             })
             .createTableIfNotExists(DatabaseConstants.SCHEMA + '.' + DatabaseConstants.CONFIG_DATA_TABLE, (table) => {
 

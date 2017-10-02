@@ -35,6 +35,10 @@ export class AppConfigRest {
         this._server.get('/appconfig/:env', (req, res) => {
             this._queryController.doACommand(req, res, DMLMethodEnum.FIND_BY_KEY);
         });
+
+        this._server.get('/appconfig', (req, res) => {
+            this._queryController.doACommand(req, res, DMLMethodEnum.FIND_ALL);
+        });
         
         this._server.post('/appconfig', (req, res) => {
             

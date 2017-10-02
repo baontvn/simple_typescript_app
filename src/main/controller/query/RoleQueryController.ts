@@ -8,6 +8,7 @@ import { RequestUtils } from '../../../lib/controller-layer/RequestUtils';
 import { RestStatusFactory } from '../../../lib/controller-layer/RestStatusFactory';
 
 export class RoleQueryController extends QueryControllerTemplate {
+    
 
     private static INSTANCE: RoleQueryController;
 
@@ -60,6 +61,22 @@ export class RoleQueryController extends QueryControllerTemplate {
     protected queryByDemand(req: Request, res: Response): Promise<string> {
         return null;
     }
-    
 
+    public async findAll(req: Request, res: Response): Promise<string> {
+        var headers: any = req.headers;
+        var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
+        var responseBody = await (() => {
+            return this._roleQr
+                .findAll(requestContext)
+                .then((status) => {
+                    console.log(status);
+                    return JSON.stringify(status);
+                })
+                .catch((err) => {
+                    return JSON.stringify(RestStatusFactory.getStatus(null, null));
+                });
+        })();
+
+        return responseBody;
+    }
 }

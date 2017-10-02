@@ -119,7 +119,7 @@ export class RoleSCR implements SingleCommandRepository {
             return knex(DatabaseConstants.SCHEMA + "." + table)
                 .where(columnName, value)
                 .then((result) => {
-                    return result ? true : false;
+                    return result.length > 0 ? true : false;
                 })
                 .catch((err) => {
                     return true;

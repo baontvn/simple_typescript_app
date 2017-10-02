@@ -24,6 +24,10 @@ export abstract class QueryControllerTemplate extends ControllerTemplate {
             return this.query(req, res);
         }
 
+        if(method === DMLMethodEnum.FIND_ALL) {
+            return this.findAll(req, res);
+        }
+
         if(method === DMLMethodEnum.QUERY_BY_DEMAND) {
             return this.queryByDemand(req, res);
         }
@@ -45,7 +49,8 @@ export abstract class QueryControllerTemplate extends ControllerTemplate {
 
         // res.json(this.getBody(req, res, method));
     }
-
+    
+    protected abstract findAll(req: Request, res: Response): Promise<string>;
     protected abstract findByKey(req: Request, res: Response): Promise<string>;
     protected abstract findByQuerystring(req: Request, res: Response): Promise<string>;
     protected abstract query(req: Request, res: Response): Promise<string>;

@@ -6,7 +6,8 @@ export class DatabaseConstants {
     
     // tables
     public static USER_DATA_TABLE: string = "user";
-    public static ROLE_DATA_TABLE: string = "user_role";
+    public static ROLE_DATA_TABLE: string = "role";
+    public static USER_ROLE_DATA_TABLE: string = "user_role";
     public static CONFIG_DATA_TABLE: string = "config";
 
     // columns
@@ -17,7 +18,6 @@ export class DatabaseConstants {
     public static USER_FULLNAME_COL: string = "fullName";
     public static USER_EMAIL_COL: string = "email";
     public static USER_PHONENO_COL: string = "phone";
-    public static USER_ROLEID_COL: string = "roleId";
     public static USER_ACTIVE_COL: string = "isActive";
     public static USER_CREATED_BY_COL: string = "createdBy";
     public static USER_CREATED_TIME_COL: string = "createdTime";
@@ -41,4 +41,8 @@ export class DatabaseConstants {
     public static CONFIG_CREATED_TIME_COL: string = "createdTime";
     public static CONFIG_MODIFIED_BY_COL: string = "editedBy";
     public static CONFIG_MODIFIED_TIME_COL: string = "editedTime";
+
+    // User Role table columns
+    public static USER_ROLE_USERID_BY_COL: string = "userId";
+    public static USER_ROLE_ROLEID_BY_COL: string = "roleId";
 }

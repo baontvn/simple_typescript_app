@@ -8,4 +8,5 @@ export interface QueryRepository {
     findByQueryString(requestContext: RequestContext, ...args: any[]): Promise<ServiceStatus>;
     query(requestContext: RequestContext, form: any): Promise<ServiceStatus>;
     queryByDemand(requestContext: RequestContext, form: any): Promise<ServiceStatus>;
+    findAll(requestContext: RequestContext): Promise<ServiceStatus>;
 }

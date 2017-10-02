@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { QueryControllerTemplate } from '../../../lib/controller-layer/QueryControllerTemplate';
 
 export class SampleQueryController extends QueryControllerTemplate {
-
+    
     private static INSTANCE: SampleQueryController;
 
     constructor() {
@@ -34,5 +34,7 @@ export class SampleQueryController extends QueryControllerTemplate {
         return null;
     }
     
-
+    protected findAll(req: Request, res: Response): Promise<string> {
+        throw new Error("Method not implemented.");
+    }
 }

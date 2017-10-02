@@ -61,5 +61,21 @@ export class UserQueryController extends QueryControllerTemplate {
         return null;
     }
 
+    public async findAll(req: Request, res: Response): Promise<string> {
+        var headers: any = req.headers;
+        var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
 
+        var response = await (()=>{
+            return this._userQr
+            .findAll(requestContext)
+            .then((status) => {
+                return JSON.stringify(status);
+            })
+            .catch((err) => {
+                return JSON.stringify(RestStatusFactory.getStatus(null, null));
+            });
+        })();
+
+        return response;
+    }
 }
