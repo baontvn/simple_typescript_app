@@ -92,6 +92,8 @@ export class UserSCR implements SingleCommandRepository {
 
             return this.checkExistedInfo(DatabaseConstants.USER_DATA_TABLE, DatabaseConstants.USER_USERNAME_COL, form.userName).then((isExisted) => {
 
+                if (!isExisted) return { message: "User is not existed!" };
+
                 return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.USER_DATA_TABLE)
                     .where(DatabaseConstants.USER_USERNAME_COL, form.userName)
                     .update({
