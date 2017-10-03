@@ -65,9 +65,15 @@ export class RoleQueryController extends QueryControllerTemplate {
     public async findAll(req: Request, res: Response): Promise<string> {
         var headers: any = req.headers;
         var requestContext: RequestContext = RequestUtils.getRequestContext(headers);
+        var queryParams : any = {
+            pageSize : !req.query.pageSize || req.query.pageSize <= 0 ? 10 : req.query.pageSize,
+            page : !req.query.page || req.query.page <= 0 ? 1 : req.query.page,
+            sortBy : req.query.sortBy ? req.query.sortBy : 'id',
+            order: req.query.order ? req.query.order : 'ASC',
+        }
         var responseBody = await (() => {
             return this._roleQr
-                .findAll(requestContext)
+                .findAll(requestContext, queryParams)
                 .then((status) => {
                     console.log(status);
                     return JSON.stringify(status);

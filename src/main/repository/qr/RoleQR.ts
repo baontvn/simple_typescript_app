@@ -63,16 +63,35 @@ export class RoleQR implements QueryRepository {
         throw new Error("Method not implemented.");
     }
 
-    public async findAll(requestContext: RequestContext): Promise<ServiceStatus> {
+    public async findAll(requestContext: RequestContext, queryParams: any): Promise<ServiceStatus> {
 
         var serviceStatus = await ((requestContext) => {
 
             var knex = this._knexConfiguration.getKnex();
-            return knex(DatabaseConstants.SCHEMA + "." + DatabaseConstants.ROLE_DATA_TABLE)
-                .select()
+            
+            var result = {
+                totalPages: 0,
+                totalRecords: 0,
+                data: []
+            }
+
+            return this.countTotalData(knex, DatabaseConstants.SCHEMA, DatabaseConstants.ROLE_DATA_TABLE)
+                .then((response) => {
+                    // Calculate the total records and total pages 
+                    result.totalRecords = response[0].count;
+                    result.totalPages = Math.round((response[0].count / queryParams.pageSize) + 0.5);
+
+                    // Update the query params
+                    queryParams.offset = (queryParams.page > result.totalPages) ? 0 : queryParams.pageSize * (queryParams.page - 1);
+                })
+                .then(() => {
+                    return this.getDataByPagination(knex, DatabaseConstants.SCHEMA, DatabaseConstants.ROLE_DATA_TABLE, queryParams);
+                })
                 .then((responseData) => {
+                    result.data = responseData;
+
                     return ServiceStatusFactory
-                        .getStatus(RestStatusCodeEnum.QUERY_HAS_DATA, responseData)
+                        .getStatus(RestStatusCodeEnum.QUERY_HAS_DATA, result)
                 })
                 .catch((err) => {
                     return ServiceStatusFactory
@@ -82,5 +101,28 @@ export class RoleQR implements QueryRepository {
         })(requestContext);
 
         return serviceStatus;
+    }
+
+    /**
+     * countTotalData - Count total number of data
+     * @param knex : Query Builder instance
+     * @param schema : Schema of DB
+     * @param table : Table name of DB
+     */
+    private countTotalData(knex: any, schema: string, table: string): any {
+        return knex(`${schema}.${table}`)
+            .count();
+    }
+    
+    /**
+     * getDataByPagination - Count total number of data
+     * @param knex : Query Builder
+     * @param schema : Schema of DB
+     * @param table : Table name of DB
+     * @param queryParams : included params PAGESIZE, OFFSET, SOFTBY and ORDER to paginate data
+     */
+    private getDataByPagination(knex: any, schema: string, table: string, queryParams: any): any[] {
+        return knex(`${schema}.${table}`)
+            .limit(queryParams.pageSize).offset(queryParams.offset).orderBy(queryParams.sortBy, queryParams.order);
     }
 }
